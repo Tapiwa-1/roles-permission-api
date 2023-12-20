@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AllRolesCollection;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -13,7 +14,7 @@ class RoleController extends Controller
     public function index(){
         try {
             $roles = Role::all();
-            return response()->json($roles, 200);
+            return response()->json(new AllRolesCollection($roles), 200);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
