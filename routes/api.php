@@ -33,7 +33,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
 });
 
-Route::middleware(['auth:sanctum','role:admin'])->group(function () {
+Route::middleware(['auth:sanctum','role:Admin'])->group(function () {
 
     Route::get('/get-roles',[ RoleController::class, 'index']);
     // Route::post('/roles/{role}/permissions', [RoleController::class, 'givePermission'])->name('roles.permission');

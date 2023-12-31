@@ -20,8 +20,9 @@ class UserCollection extends ResourceCollection
                 'name' => $user->name,
                 'email' => $user->email,
                 'image' => url('/') . $user->image,
-                'user.userRoles' => $request->user() ? $request->user()->roles->pluck('name') : [],
-            'user.userPermissions' => $request->user() ? $request->user()->getPermissionsViaRoles()->pluck('name') : [],
+                'userRoles' => $user->getRoleNames(),
+                'rolesss'=> $user->hasRole('admin'),
+                'userPermissions' => $user->getPermissionsViaRoles()->pluck('name'),
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
             ];
