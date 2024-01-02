@@ -33,10 +33,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
 });
 
-Route::middleware(['auth:sanctum','role:Admin'])->group(function () {
+Route::middleware(['auth:sanctum','role:admin'])->group(function () {
 
     Route::get('/get-roles',[ RoleController::class, 'index']);
-    // Route::post('/roles/{role}/permissions', [RoleController::class, 'givePermission'])->name('roles.permission');
+    Route::get('/add-role/{role}',[ RoleController::class, 'store']);
+    Route::post('/roles/{role}/permissions', [RoleController::class, 'givePermission']);
     // Route::delete('/roles/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])->name('roles.permissions.revoke');
     // Route::resource('/permissions', PermissionController::class);
     // Route::post('/permissions/{permission}/roles', [PermissionController::class, 'assignRole'])->name('permissions.role');

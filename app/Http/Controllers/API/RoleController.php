@@ -23,10 +23,15 @@ class RoleController extends Controller
 
     
     public function store(Request $request){
-        $validated = $request->validate(['name' => 'required']);
-        Role::create($validated);
-
-        return to_route('admin.roles.index')->with('message','role added successfully');
+        
+        try {
+            $validated = $request->validate(['name' => 'required']);
+            Role::create($validated);
+            return response()->json('New role Created', 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
+       
     }
     public function edit(Role $role){
         $assignedPermission = $role->permissions;
